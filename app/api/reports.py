@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, Query
 from fastapi.responses import Response
 from app.services.export_service import export_visits_report
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.db.session import get_db
 from app.api.deps import RoleChecker
 from app.models.user import UserRole
 

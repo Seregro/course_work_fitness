@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">FitnessDB Admin</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <!-- Боковая панель -->
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">Главная</a>
+                    <a href="/reports/visits?format=xlsx" class="list-group-item list-group-item-action">Отчет по визитам (XLSX)</a>
+                    <a href="/reports/visits?format=json" class="list-group-item list-group-item-action">Данные (JSON)</a>
+                </div>
+            </div>
+            
+            <!-- Основной контент -->
+            <div class="col-md-9">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3>Статистика клуба</h3>
+                        <p>Добро пожаловать в систему управления фитнес-центром.</p>
+                        <hr>
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="p-3 border bg-white"><h5>Клиенты</h5><p class="display-6">120</p></div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 border bg-white"><h5>Тренеры</h5><p class="display-6">15</p></div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 border bg-white"><h5>В зале сейчас</h5><p class="display-6">8</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <h4>Быстрые действия</h4>
+                    <button class="btn btn-primary" onclick="alert('Вызов API бэкапа...')">Создать бэкап БД</button>
+                    <button class="btn btn-success">Добавить клиента</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
