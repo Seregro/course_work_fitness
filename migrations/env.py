@@ -14,6 +14,8 @@ from app.core.config import settings
 from app.db.session import Base
 # Импортируем модели, чтобы alembic их "увидел"
 from app.models.user import User 
+from app.models.gym import Gym
+from app.models.workout import WorkoutType
 
 # Это объект конфигурации Alembic
 config = context.config
