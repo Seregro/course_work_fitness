@@ -2,31 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>FitnessPro</title>
+    <title>Мой Фитнес</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex h-screen">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-indigo-900 text-white flex flex-col">
-        <div class="p-6 text-2xl font-bold border-b border-indigo-800">FitnessPro</div>
-        <nav class="flex-1 mt-4">
-            {% if user.role.value != 'client' %}
-                <a href="/admin/dashboard" class="block py-3 px-6 hover:bg-indigo-800"><i class="fas fa-chart-line mr-3"></i>Дашборд</a>
-                <a href="/clients" class="block py-3 px-6 hover:bg-indigo-800"><i class="fas fa-users mr-3"></i>Клиенты</a>
-            {% else %}
-                <a href="/me" class="block py-3 px-6 hover:bg-indigo-800"><i class="fas fa-user mr-3"></i>Мой профиль</a>
-                <a href="/book" class="block py-3 px-6 hover:bg-indigo-800"><i class="fas fa-calendar-check mr-3"></i>Записаться</a>
-            {% endif %}
-        </nav>
-        <div class="p-6 border-t border-indigo-800">
-            <div class="text-sm opacity-60 mb-2">{{ user.full_name }}</div>
-            <a href="/auth/logout" class="text-indigo-300 hover:text-white"><i class="fas fa-sign-out-alt mr-2"></i>Выйти</a>
+<body class="bg-gray-50 text-gray-800">
+    <nav class="bg-white shadow-sm p-4 flex justify-between items-center max-w-5xl mx-auto mt-4 rounded-2xl">
+        <a href="/" class="text-xl font-bold text-indigo-600">FitnessApp</a>
+        <div class="space-x-4">
+            <a href="/schedule">Расписание</a>
+            <a href="/auth/logout" class="text-red-500">Выйти</a>
         </div>
-    </aside>
-
-    <!-- Content -->
-    <main class="flex-1 overflow-y-auto p-10">
+    </nav>
+    <main class="max-w-5xl mx-auto p-6">
         {% block content %}{% endblock %}
     </main>
 </body>

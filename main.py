@@ -1,9 +1,7 @@
 from fastapi import FastAPI
-from app.api import auth, reports, views, operations 
+from app.api import auth, views
 
-app = FastAPI(title="Fitness Pro System")
+app = FastAPI()
 
 app.include_router(auth.router)
-app.include_router(reports.router)
-app.include_router(operations.router)
 app.include_router(views.router)
