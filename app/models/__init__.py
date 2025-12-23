@@ -1,4 +1,4 @@
-from .user import User
+from .user import User, UserRole
 from .gym import Gym
 from .workout import WorkoutType
 from .subscription_type import SubscriptionType

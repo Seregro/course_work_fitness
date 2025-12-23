@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-4xl space-y-6">
+    <div class="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-8 rounded-2xl shadow-lg">
+        <h1 class="text-3xl font-bold">Добро пожаловать, {{ user.full_name }}!</h1>
+        <p class="mt-2 opacity-90">Ваш клубный номер: <span class="font-mono font-bold">{{ client.card_number }}</span></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border">
+            <h2 class="text-xl font-bold mb-4">Мои абонементы</h2>
+            {% for sub in subscriptions %}
+            <div class="p-4 rounded-xl bg-green-50 border border-green-100 mb-3">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="font-bold text-green-900">{{ sub.sub_type.name }}</div>
+                        <div class="text-sm text-green-700">Активен до {{ sub.end_date.strftime('%d.%m.%Y') }}</div>
+                    </div>
+                    <span class="bg-green-500 text-white text-[10px] px-2 py-1 rounded-full uppercase">Active</span>
+                </div>
+            </div>
+            {% else %}
+            <p class="text-gray-400">У вас пока нет активных абонементов.</p>
+            {% endfor %}
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border">
+            <h2 class="text-xl font-bold mb-4">История посещений</h2>
+            <div class="space-y-3">
+                {% for visit in visits %}
+                <div class="flex justify-between text-sm border-b pb-2">
+                    <span class="text-gray-600">{{ visit.check_in.strftime('%d.%m.%Y %H:%M') }}</span>
+                    <span class="font-medium text-indigo-600">Зал №{{ visit.locker_id or '1' }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

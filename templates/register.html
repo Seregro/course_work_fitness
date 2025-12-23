@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-indigo-900 flex items-center justify-center h-screen">
+    <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md">
+        <h1 class="text-3xl font-bold text-center mb-6 text-indigo-900">Регистрация</h1>
+        <form action="/auth/register" method="post" class="space-y-4">
+            <input type="text" name="full_name" placeholder="ФИО" class="w-full border p-3 rounded-xl border-gray-300" required>
+            <input type="email" name="email" placeholder="Email" class="w-full border p-3 rounded-xl border-gray-300" required>
+            <input type="password" name="password" placeholder="Пароль" class="w-full border p-3 rounded-xl border-gray-300" required>
+            <input type="text" name="phone" placeholder="Телефон" class="w-full border p-3 rounded-xl border-gray-300" required>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition">Зарегистрироваться</button>
+        </form>
+        <p class="text-center mt-4 text-sm text-gray-500">
+            Уже есть аккаунт? <a href="/login" class="text-indigo-600 font-bold">Войти</a>
+        </p>
+    </div>
+</body>
+</html>
