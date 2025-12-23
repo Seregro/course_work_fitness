@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-bold">База клиентов</h2>
+        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg">+ Новый клиент</button>
+    </div>
+    <table class="w-full text-left">
+        <thead>
+            <tr class="text-gray-400 border-b">
+                <th class="pb-3">ФИО</th>
+                <th class="pb-3">Телефон</th>
+                <th class="pb-3">Номер карты</th>
+                <th class="pb-3">Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr class="border-b hover:bg-gray-50">
+                <td class="py-4">{{ client.user.full_name }}</td>
+                <td class="py-4">{{ client.phone }}</td>
+                <td class="py-4"><code>{{ client.card_number }}</code></td>
+                <td class="py-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Активен</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-xl shadow-sm border col-span-1">
+        <h2 class="font-bold mb-4">Оформить продажу</h2>
+        <form action="/ops/sale" method="post" class="space-y-4">
+            <input type="text" name="item_name" placeholder="Товар (вода, батончик)" class="w-full border p-2 rounded" required>
+            <input type="number" name="price" placeholder="Цена" class="w-full border p-2 rounded" required>
+            <input type="number" name="quantity" value="1" class="w-full border p-2 rounded" required>
+            <button type="submit" class="w-full bg-indigo-600 text-white p-2 rounded hover:bg-indigo-700">Продать</button>
+        </form>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border col-span-2">
+        <h2 class="font-bold mb-4">История продаж</h2>
+        <table class="w-full text-sm">
+            <tr class="text-gray-400 border-b">
+                <th class="py-2">Товар</th>
+                <th class="py-2">Кол-во</th>
+                <th class="py-2">Сумма</th>
+                <th class="py-2">Время</th>
+            </tr>
+            {% for sale in sales %}
+            <tr class="border-b">
+                <td class="py-2">{{ sale.item_name }}</td>
+                <td class="py-2 text-center">{{ sale.quantity }}</td>
+                <td class="py-2 font-bold">{{ sale.price * sale.quantity }} ₽</td>
+                <td class="py-2 text-gray-400">{{ sale.sold_at.strftime('%H:%M %d.%m') }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid grid-cols-3 gap-6">
+    <div class="col-span-2 bg-white rounded-xl shadow-sm p-6">
+        <h2 class="text-xl font-bold mb-4">Журнал посещений</h2>
+        <table class="w-full">
+            <tr class="text-gray-400 border-b text-sm">
+                <th class="py-2 text-left">Клиент</th>
+                <th class="py-2 text-left">Шкафчик</th>
+                <th class="py-2 text-left">Вход</th>
+                <th class="py-2 text-left">Выход</th>
+            </tr>
+            {% for visit in visits %}
+            <tr class="border-b">
+                <td class="py-3">{{ visit.client.user.full_name }}</td>
+                <td class="py-3">#{{ visit.locker.number if visit.locker else '—' }}</td>
+                <td class="py-3 text-sm">{{ visit.check_in.strftime('%H:%M %d.%m') }}</td>
+                <td class="py-3 text-sm">{{ visit.check_out.strftime('%H:%M') if visit.check_out else 'В зале' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm p-6">
+        <h2 class="text-xl font-bold mb-4">Шкафчики</h2>
+        <div class="grid grid-cols-4 gap-2">
+            {% for locker in lockers %}
+            <div class="p-2 text-center rounded border {{ 'bg-red-100 text-red-700' if locker.is_occupied else 'bg-green-100 text-green-700' }}">
+                {{ locker.number }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

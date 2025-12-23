@@ -1,24 +1,57 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, Form, HTTPException
+from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import update, select
 from app.db.session import get_db
-from app.models.subscription import Subscription
-from app.models.visit_log import VisitLog
-from app.models.sale import Sale
-from datetime import datetime
+from app.models import Sale, Client, Locker, VisitLog, Subscription, SubscriptionType
+from datetime import datetime, timedelta
 
-router = APIRouter(prefix="/ops", tags=["operations"])
-
-@router.post("/check-in/{client_id}")
-async def check_in(client_id: int, locker_id: int, db: AsyncSession = Depends(get_db)):
-    # Логика: проверить активный абонемент и создать запись в VisitLog
-    visit = VisitLog(client_id=client_id, locker_id=locker_id, check_in=datetime.utcnow())
-    db.add(visit)
-    await db.commit()
-    return {"status": "checked in", "visit_id": visit.id}
+router = APIRouter(prefix="/ops", tags=["Operations"])
 
 @router.post("/sale")
-async def process_sale(item: str, price: float, seller_id: int, db: AsyncSession = Depends(get_db)):
-    sale = Sale(item_name=item, price=price, seller_id=seller_id)
-    db.add(sale)
+async def process_sale(
+    item_name: str = Form(...),
+    price: float = Form(...),
+    quantity: int = Form(...),
+    db: AsyncSession = Depends(get_db)
+):
+    # В реальности тут должен быть ID текущего юзера (продавца)
+    new_sale = Sale(item_name=item_name, price=price, quantity=quantity, seller_id=1) 
+    db.add(new_sale)
     await db.commit()
-    return {"status": "sold", "item": item}
+    return RedirectResponse(url="/sales", status_code=303)
+
+@router.post("/check-in")
+async def check_in(
+    client_id: int = Form(...),
+    locker_id: int = Form(...),
+    db: AsyncSession = Depends(get_db)
+):
+    # Проверяем, свободен ли шкафчик
+    locker = await db.get(Locker, locker_id)
+    if locker.is_occupied:
+        raise HTTPException(status_code=400, detail="Locker occupied")
+    
+    # Создаем визит и занимаем шкафчик
+    visit = VisitLog(client_id=client_id, locker_id=locker_id)
+    locker.is_occupied = True
+    db.add(visit)
+    await db.commit()
+    return RedirectResponse(url="/visits", status_code=303)
+
+@router.post("/add-subscription")
+async def add_sub(
+    client_id: int = Form(...),
+    type_id: int = Form(...),
+    db: AsyncSession = Depends(get_db)
+):
+    sub_type = await db.get(SubscriptionType, type_id)
+    new_sub = Subscription(
+        client_id=client_id,
+        type_id=type_id,
+        start_date=datetime.now().date(),
+        end_date=(datetime.now() + timedelta(days=sub_type.duration_days)).date()
+    )
+    db.add(new_sub)
+    await db.commit()
+    return RedirectResponse(url="/subscriptions", status_code=303)
