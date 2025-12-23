@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitnessPro - Система управления</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-indigo-900 text-white flex-shrink-0">
+            <div class="p-6 text-2xl font-bold border-b border-indigo-800">
+                Fitness<span class="text-indigo-400">Pro</span>
+            </div>
+            <nav class="mt-6">
+                <a href="/" class="flex items-center py-3 px-6 bg-indigo-800 text-white">
+                    <i class="fas fa-chart-line mr-3"></i> Дашборд
+                </a>
+                <a href="/clients" class="flex items-center py-3 px-6 hover:bg-indigo-800 transition">
+                    <i class="fas fa-users mr-3"></i> Клиенты
+                </a>
+                <a href="/schedule" class="flex items-center py-3 px-6 hover:bg-indigo-800 transition">
+                    <i class="fas fa-calendar-alt mr-3"></i> Расписание
+                </a>
+                <a href="/reports" class="flex items-center py-3 px-6 hover:bg-indigo-800 transition">
+                    <i class="fas fa-file-export mr-3"></i> Отчеты
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm py-4 px-8 flex justify-between items-center">
+                <h1 class="text-xl font-semibold text-gray-800">Система управления клубом</h1>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-600">Администратор</span>
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Выйти</button>
+                </div>
+            </header>
+            <main class="flex-1 overflow-y-auto p-8">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+</body>
+</html>

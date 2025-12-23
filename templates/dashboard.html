@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <!-- Stats Cards -->
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div class="text-gray-500 text-sm">Активных клиентов</div>
+        <div class="text-3xl font-bold text-indigo-600">1,284</div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div class="text-gray-500 text-sm">Тренеров в смене</div>
+        <div class="text-3xl font-bold text-green-600">12</div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div class="text-gray-500 text-sm">Загрузка залов</div>
+        <div class="text-3xl font-bold text-orange-600">75%</div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div class="text-gray-500 text-sm">Выручка (мес)</div>
+        <div class="text-3xl font-bold text-gray-800">450k ₽</div>
+    </div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <h2 class="text-lg font-bold mb-4">Ближайшие занятия</h2>
+    <table class="w-full text-left">
+        <thead>
+            <tr class="text-gray-400 border-b">
+                <th class="pb-3 font-medium">Время</th>
+                <th class="pb-3 font-medium">Зал</th>
+                <th class="pb-3 font-medium">Тренировка</th>
+                <th class="pb-3 font-medium">Тренер</th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-600">
+            <tr class="border-b hover:bg-gray-50">
+                <td class="py-4">18:00</td>
+                <td class="py-4">Зал №1 (Йога)</td>
+                <td class="py-4">Hatha Yoga</td>
+                <td class="py-4 font-medium">Елена Иванова</td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+                <td class="py-4">19:30</td>
+                <td class="py-4">Main Hall</td>
+                <td class="py-4">Crossfit Intro</td>
+                <td class="py-4 font-medium">Алексей Петров</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
