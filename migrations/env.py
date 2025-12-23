@@ -16,6 +16,13 @@ from app.db.session import Base
 from app.models.user import User 
 from app.models.gym import Gym
 from app.models.workout import WorkoutType
+from app.models.subscription_type import SubscriptionType
+from app.models.subscription import Subscription
+from app.models.locker import Locker
+from app.models.profiles import Client, Trainer
+from app.models.schedule import Schedule
+from app.models.visit_log import VisitLog
+from app.models.sale import Sale
 
 # Это объект конфигурации Alembic
 config = context.config
